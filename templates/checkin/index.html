@@ -4,6 +4,10 @@
 {% block header %}Code Camp Registrations{% endblock %}
 
 {% block body %}
+<form action="/checkin/filter/" method="POST">
+  <input type="text" id="filter_text" name="filter_text" value="{{ filter_text }}" />
+  <input type="submit" value="Filter" />
+</form>
 {% if registration_list %}
   <ul id="checkinlist">
   {% for registration in registration_list %}
