@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+
+{% block header %}Code Camp Registrations{% endblock %}
+
+{% block body %}
+{% if registration_list %}
+  <ul>
+  {% for registration in registration_list %}
+    <li>{{ registration }}</li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No registrations to list.</p>
+{% endif %}
+{% endblock %}
+
+{% block footer %} Copyright (c) 2010 Jeff Craig &lt;foxxtrot@foxxtrot.net>{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+   <title>{% block title %}Title Goes Here{% endblock %}</title>
+   <link rel="stylesheet" href="http://yui.yahooapis.com/2.8.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <style type="text/css">
+    #hd {
+      margin: 1em;
+    }
+    #hd h1 {
+      font-size: 189%;
+      text-align: center;
+    }
+    #ft {
+      margin: 0.5em;
+      font-size: 77%;
+    }
+    #bd ul li {
+      list-style-type: disc;
+    }
+    </style>
+</head>
+<body>
+<div id="doc" class="yui-t7">
+   <div id="hd" role="banner"><h1>{% block header %}Header goes Here {% endblock %}</h1></div>
+   <div id="bd" role="main">
+	<div class="yui-g">
+          {% block body %}{% endblock %}
+	</div>
+   </div>
+   <div id="ft" role="contentinfo"><p>{% block footer %}{% endblock %}</p></div>
+</div>
+</body>
+</html>
+
