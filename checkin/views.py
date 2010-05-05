@@ -4,8 +4,12 @@ from pcc2010.checkin.models import Registration
 from django.db.models import Q
 
 def index(request):
-    registration_list = Registration.objects.filter(Q(full_name__contains = request.session['filter_text']) | Q(email__contains = request.session['filter_text'])).order_by('full_name')
-    return render_to_response('checkin/index.html', {'registration_list': registration_list, 'filter_text': request.session['filter_text']})
+    try:
+        ft = request.session['filter_text']
+    except KeyError:
+        ft = ""
+    registration_list = Registration.objects.filter(Q(full_name__contains = ft) | Q(email__contains = ft)).order_by('full_name')
+    return render_to_response('checkin/index.html', {'registration_list': registration_list, 'filter_text': ft})
 
 def checkin(request, registration_id):
     try:
