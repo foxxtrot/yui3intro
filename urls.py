@@ -5,6 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^checkin/$', 'pcc2010.checkin.views.index'),
+    (r'^checkin/checkin/(?P<registration_id>\d+)$', 'pcc2010.checkin.views.checkin'),
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

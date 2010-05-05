@@ -1,12 +1,15 @@
 {% extends "template.html" %}
 
+{% block title %}Code Camp Checkin Page {% endblock %}
 {% block header %}Code Camp Registrations{% endblock %}
 
 {% block body %}
 {% if registration_list %}
-  <ul>
+  <ul id="checkinlist">
   {% for registration in registration_list %}
-    <li>{{ registration }}</li>
+    <li class="{{ registration.checkedin|yesno:"yes,no" }}">
+      <a href="/checkin/checkin/{{ registration.id }}">{{ registration }}</a>
+    </li>
   {% endfor %}
   </ul>
 {% else %}
