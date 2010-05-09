@@ -8,17 +8,21 @@
   <input type="text" id="filter_text" name="filter_text" value="{{ filter_text }}" />
   <input type="submit" value="Filter" />
 </form>
-{% if registration_list %}
   <ul id="checkinlist">
   {% for registration in registration_list %}
     <li class="{{ registration.checkedin|yesno:"yes,no" }}">
       <a href="/checkin/checkin/{{ registration.id }}">{{ registration }}</a>
     </li>
+  {% empty %}
+    <li>No registrations to list.</li>
   {% endfor %}
   </ul>
-{% else %}
-  <p>No registrations to list.</p>
-{% endif %}
+  {% if prev_page %}
+  <a href="{{link_prefix}}{{ prev_page }}">&lt; Prev</a>&nbsp;&nbsp;
+  {% endif %}
+  {% if next_page %}
+  <a href="{{link_prefix}}{{ next_page }}">Next &gt;</a>
+  {% endif %} 
 {% endblock %}
 
-{% block footer %} Copyright (c) 2010 Jeff Craig &lt;foxxtrot@foxxtrot.net>{% endblock %}
+{% block footer %}Copyright (c) 2010 <a href="mailto:foxxtrot@foxxtrot.net">Jeff Craig</a>{% endblock %}
