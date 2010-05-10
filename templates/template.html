@@ -3,7 +3,7 @@
 <html>
 <head>
    <title>{% block title %}Title Goes Here{% endblock %}</title>
-   <link rel="stylesheet" href="http://yui.yahooapis.com/2.8.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+   <link rel="stylesheet" href="/static/css/reset-fonts-grids.css" type="text/css">
     <style type="text/css">
     #hd {
       margin: 1em;
@@ -34,6 +34,8 @@
    </div>
    <div id="ft" role="contentinfo"><p>{% block footer %}{% endblock %}</p></div>
 </div>
+<script type="text/javascript" src="/static/yui/yui/yui-min.js"></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
 

@@ -10,9 +10,6 @@ urlpatterns = patterns('',
     (r'^checkin/filter/(?P<filter_text>[\w\d%]+)/page/(?P<page_number>\d+)$', 'pcc2010.checkin.views.filter'),
     (r'^checkin/filter/$', 'pcc2010.checkin.views.filter'),
     (r'^checkin/page/(?P<page_number>\d+)$', 'pcc2010.checkin.views.index'),
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': 'static', 'show_indexes': True }),
     (r'^admin/', include(admin.site.urls)),
 )
