@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.core import serializers
 from django.shortcuts import render_to_response
 from pcc2010.checkin.models import Registration
 from django.db.models import Q
 from pcc2010.checkin.utilities import getNextPageNumber, getPrevPageNumber
-
+import simplejson as json
 
 PAGE_LENGTH = 25
 
@@ -27,12 +28,14 @@ def checkin(request, registration_id):
         raise Http404
     r.checkedin = True
     r.save()
-
     
-    if request.META["HTTP_REFERER"]:
-        return HttpResponseRedirect(request.META["HTTP_REFERER"])
+    if request.is_ajax():
+	    return HttpResponse(json.dumps({'id': registration_id, 'checkedin': True}))
     else:
-        return HttpResponseRedirect('/checkin/')
+        if request.META["HTTP_REFERER"]:
+            return HttpResponseRedirect(request.META["HTTP_REFERER"])
+        else:
+            return HttpResponseRedirect('/checkin/')
 
 def filter(request, filter_text = None, page_number = 1):
     if filter_text == None:

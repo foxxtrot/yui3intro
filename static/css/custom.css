@@ -1,0 +1,23 @@
+#hd {
+	margin: 1em;
+}
+#hd h1 {
+      font-size: 189%;
+      text-align: center;
+}
+#ft {
+      margin: 0.5em;
+      font-size: 77%;
+}
+#checkinlist li.checkedin {
+      list-style-type: circle;
+}
+#checkinlist li {
+      list-style-type: square;
+}
+.hidden {
+	display: none;
+}
+.show {
+	display: inline;
+}
