@@ -2,6 +2,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response
 from pcc2010.checkin.models import Registration
 from django.db.models import Q
+from pcc2010.checkin.utilities import getNextPageNumber, getPrevPageNumber
+
 
 PAGE_LENGTH = 25
 
@@ -12,11 +14,8 @@ def index(request, page_number=1):
 		    'registration_list': registration_list[(page_number-1) * PAGE_LENGTH:(page_number * PAGE_LENGTH) - 1],
 		    'filter_text': ""
 		}
-    if page_number > 1:
-	    view_data["prev_page"] = page_number - 1
-    if page_number != len(registration_list) / PAGE_LENGTH:
-	    view_data["next_page"] = page_number + 1
-
+    view_data["prev_page"] = getPrevPageNumber(page_number)
+    view_data["next_page"] = getNextPageNumber(page_number, len(registration_list), PAGE_LENGTH)
     view_data["link_prefix"] = "/checkin/page/";
 
     return render_to_response('checkin/index.html', view_data);
@@ -46,11 +45,9 @@ def filter(request, filter_text = None, page_number = 1):
 		    'registration_list': registration_list[(page_number-1) * PAGE_LENGTH:(page_number * PAGE_LENGTH) - 1],
 		    'filter_text': filter_text
 		}
-    if page_number > 1:
-	    view_data["prev_page"] = page_number - 1
-    if page_number != len(registration_list) / PAGE_LENGTH:
-	    view_data["next_page"] = page_number + 1
-	
+
+    view_data["prev_page"] = getPrevPageNumber(page_number)
+    view_data["next_page"] = getNextPageNumber(page_number, len(registration_list), PAGE_LENGTH)
     view_data["link_prefix"] = "/checkin/filter/%s/page/" % filter_text
 
     return render_to_response('checkin/index.html', view_data);
