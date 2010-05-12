@@ -10,15 +10,15 @@
 </form>
   <ul id="checkinlist">
   {% for registration in registration_list %}
-    <li class="{{ registration.checkedin|yesno:"yes,no" }}">
+    <li class="{{ registration.checkedin|yesno:"checkedin," }}">
       <a href="/checkin/checkin/{{ registration.id }}" class="checkin_link">{{ registration }}</a>
     </li>
   {% empty %}
     <li>No registrations to list.</li>
   {% endfor %}
   </ul>
-  <a id="prev" href="{{link_prefix}}{{ prev_page }}" class="{{ prev_page|yesno:"show,hidden" }}">&lt; Prev</a>&nbsp;&nbsp;
-  <a id="next" href="{{link_prefix}}{{ next_page }}" class="{{ next_page|yesno:"show,hidden" }}">Next &gt;</a>
+  <a id="prev" href="{{link_prefix}}{{ prev_page }}" class="{{ prev_page|yesno:",hidden" }}">&lt; Prev</a>&nbsp;&nbsp;
+  <a id="next" href="{{link_prefix}}{{ next_page }}" class="{{ next_page|yesno:",hidden" }}">Next &gt;</a>
 {% endblock %}
 
 {% block footer %}Copyright (c) 2010 <a href="mailto:foxxtrot@foxxtrot.net">Jeff Craig</a>{% endblock %}
