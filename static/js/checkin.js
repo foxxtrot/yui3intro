@@ -30,7 +30,7 @@ YUI().use('node', 'io', 'json-parse', 'substitute', function(Y) {
 		}
 		checkinList.setContent(html);
 	};
-	Y.on('click', function(ev) {
+	nextLink.on('click', function(ev) {
 		Y.log('Next clicked!');
 		Y.io(ev.target.get('href'), {
 			on: {
@@ -38,8 +38,8 @@ YUI().use('node', 'io', 'json-parse', 'substitute', function(Y) {
 			}
 		});
 		ev.preventDefault();
-	}, "#next");
-	Y.on('click', function(ev) {
+	});
+	prevLink.on('click', function(ev) {
 		Y.log('Previous clicked!');
 		Y.io(ev.target.get('href'), {
 			on: {
@@ -47,8 +47,24 @@ YUI().use('node', 'io', 'json-parse', 'substitute', function(Y) {
 			}
 		});
 		ev.preventDefault();
-	}, "#prev");
+	});
 
+	Y.on('keyup', function(ev) {
+		var value = ev.target.get('value'), url;
+		Y.log('Change Event: ' + value);
+		if (value !== '') {
+			url = '/checkin/filter/' + value;
+		} else {
+			url = '/checkin/';
+		}
+		Y.io(url, {
+			on: {
+				success: rebuildList
+			}
+		});
+	}, "#filter_text");
+
+	Y.one('#filter_text').get('parentNode').one('input[type=submit]').remove();
 	Y.delegate("click", function(ev) {
 		ev.preventDefault();
 		Y.io(ev.target.get('href'), {
