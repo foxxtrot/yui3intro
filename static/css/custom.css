@@ -18,3 +18,7 @@
 .hidden {
 	display: none;
 }
+#progress {
+	margin-left: auto;
+	margin-right: auto;
+}

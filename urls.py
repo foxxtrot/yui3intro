@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     (r'^checkin/filter/(?P<filter_text>[\w\d%]+)/page/(?P<page_number>\d+)$', 'pcc2010.checkin.views.filter'),
     (r'^checkin/filter/$', 'pcc2010.checkin.views.filter'),
     (r'^checkin/page/(?P<page_number>\d+)$', 'pcc2010.checkin.views.index'),
+    (r'^checkin/stats$', 'pcc2010.checkin.views.stats'),
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root': 'static', 'show_indexes': True }),
     (r'^admin/', include(admin.site.urls)),
 )
