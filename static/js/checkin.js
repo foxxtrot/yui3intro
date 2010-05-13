@@ -79,11 +79,14 @@ YUI().use('node', 'io', 'json-parse', 'substitute', function(Y) {
     }, '#checkinlist', 'a.checkin_link');
 });
 
-YUI().use('node', 'json-parse', 'yui2-progressbar', 'gallery-io-poller', function(Y) {
+YUI().use('node', 'json-parse', 'yui2-progressbar', 'gallery-io-poller', 'overlay', 'substitute', function(Y) {
     var container = Y.Node.create("<div id='progress'></div>"),
-        progress;
+        progress, overlay;
     Y.one('#bd .yui-g').insert(container, 0);
-
+    Y.one('#bd').insert('<div id="overlay"></div>');
+    overlay = new Y.Overlay();
+    overlay.render('#overlay');
+    overlay.hide();
     progress = new Y.YUI2.widget.ProgressBar().render('progress');
     Y.io.poll(5000, '/checkin/stats', {
         on: {
@@ -91,7 +94,18 @@ YUI().use('node', 'json-parse', 'yui2-progressbar', 'gallery-io-poller', functio
                 var data = Y.JSON.parse(response.responseText);
                 progress.set('maxValue', data.total);
                 progress.set('value', data.checkedin);
+
+                overlay.set('bodyContent', Y.substitute('<ul><li>Checked-in: {checkedin}</li><li>Total Registrations: {total}</li></ul>',
+                    data));
             }
         }
     }).start();
+
+    container.on('mouseover', function(ev) {
+        overlay.show();
+    });
+
+    container.on('mouseout', function(ev) {
+        overlay.hide();
+    });
 });
