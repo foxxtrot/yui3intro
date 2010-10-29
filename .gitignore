@@ -1,2 +1,9 @@
 *.pyc
 pcc2010.db
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb

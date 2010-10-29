@@ -54,7 +54,7 @@
    \end{itemize}}{Utilities}
   \item \alt<5>{Widgets
    \begin{itemize}
-    \item Overlay, Slider, TabView
+    \item Overlay, Slider, TabView, GridView
    \end{itemize}}{Widgets}
   \item \alt<6>{Developer Tools
    \begin{itemize}
@@ -70,6 +70,7 @@
   \item Modular: Load only the code you need.
   \item Flexible: Base functionality provides flexible Attribute and Plugin systems
   \item Complete: Tons of utilities available now, and widgets are coming
+  \item Fast: Demonstrable faster at common tasks, and fast enough for one of the worlds largest websites.
  \end{itemize}
 \end{frame}
 
@@ -77,7 +78,29 @@
 \begin{frame}
  \frametitle{Why not YUI3?}
  \begin{itemize}
-  \item Most widgets haven't been ported yet.
+  \item Your existing codebase works
+  \item Many widgets haven't been ported yet.
+  \item<2-> Some will not be.
+ \end{itemize}
+\end{frame}
+
+\subsection{SimpleYUI}
+\begin{frame}
+ \frametitle{SimpleYUI}
+ \begin{itemize}
+  \item Introduced with YUI 3.2
+  \item Eliminates the Sandbox
+  \item Fastest way to get started with YUI3
+  \item Provides Node/Events, Transitions, IO
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Why not use SimpleYUI?}
+ \begin{itemize}
+  \item There are performance benefits to using the module pattern
+  \item There is safety in the sandbox
+  \item You have more control in standard YUI
  \end{itemize}
 \end{frame}
 
@@ -97,20 +120,147 @@
 \begin{frame}
  \frametitle{YUI Resources}
  \begin{itemize}
-  \item http://developer.yahoo.com/yui/3/
   \item http://yuilibrary.com/
+  \item http://developer.yahoo.com/yui/3/
   \item http://github.com/yui/
   \item http://yuiblog.com/
   \item http://twitter.com/miraglia/yui/members
  \end{itemize}
 \end{frame}
 
+\subsection{Standard Utilities}
+\begin{frame}[fragile]
+ \frametitle{Node}
+ \begin{verbatim}
+Y.one('#nav');
+Y.all('#nav li');
+ \end{verbatim}
+ \begin{itemize}
+  \item Y.one returns a 'Node'
+  \item Y.all returns a 'NodeList'
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Node Methods}
+ \begin{verbatim}
+var input = Y.one('input[type=text]');
+input.addClass('hide'); // Add the 'hide' class to the node
+input.removeClass('hide');
+input.toggleClass('hide');
+input.get('value');
+input.getStyle('display');
+
+input.test('.hide'); // Tests if the node matches a selctor
+ \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{NodeList Methods}
+ \begin{verbatim}
+var items = Y.one('li');
+
+items.filter('.hidden');
+
+items.even().addClass('even');
+items.odd().addClass('odd');
+
+items.item(4); // NOT an array-like object
+items.size();
+
+items.each(function(item, index, list) {
+    // Treat this kind of like a for loop.
+});
+ \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Events}
+ \begin{verbatim}
+Y.on('click', handler, '#actionButton');
+handler = function(e) {
+    // e is a DOM Event Facade
+    // Same betwen all browsers
+    e.halt(); // Stop propogation and default action
+    e.preventDefault();
+    e.stopPropogation();
+}
+ \end{verbatim}
+ \begin{itemize}
+  \item Same syntax as custom events
+  \item Support for touch events
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Event Delegation}
+ \begin{verbatim}
+Y.delegate('click', handler, '#container', selector);
+ \end{verbatim}
+ \begin{itemize}
+  \item Assign one event, on the container, but only call the handler on children that match the selector.
+  \item<2-> Doesn't fix non-bubbling events, like change-events in Internet Explorer 
+ \end{itemize}
+\end{frame}
+
+\subsection{AJAX}
+\begin{frame}[fragile]
+ \frametitle{Server Calls}
+ \begin{verbatim}
+Y.io("/path/to/request", {
+        method: 'GET',
+        data: 'field1=value&field2=3',
+        on: {
+            start: handler,
+            complete: handler,
+            success: handler,
+            failure: handler,
+            end: handler
+        }
+        sync: false,
+        timeout: 2000
+    });
+ \end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{JSON}
+\begin{verbatim}
+Y.JSON.stringify({
+    name: "Jeff Craig",
+    nick: "foxxtrot",
+    session: "Intro to YUI3"
+});
+
+
+Y.JSON.parse("{'event': 'Palouse Code Camp', 
+               'date': '2010.10.30'}");
+
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Transistions}
+\begin{verbatim}
+Y.one('#demo').transition({
+  duration: 1, // seconds
+  easing: 'ease-out',
+  height: 0,
+  width: 0,
+  left: '150px',
+  top: '100px',
+  opacity: 0
+}, function() { Y.one('#demo').destroy(true); } );
+\end{verbatim}
+\end{frame}
+
+\subsection{End Notes}
 \begin{frame}
  \frametitle{Links}
  YUI:
  \begin{itemize}
-  \item http://developer.yahoo.com/yui/3/
   \item http://yuilibrary.com/
+  \item http://developer.yahoo.com/yui/3/
   \item http://github.com/yui/
   \item http://yuiblog.com/
   \item http://twitter.com/miraglia/yui/members
