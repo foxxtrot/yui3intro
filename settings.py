@@ -1,4 +1,4 @@
-# Django settings for pcc2010 project.
+# Django settings for yui3intro project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,7 +10,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'  
-DATABASE_NAME = 'pcc2010.db'             # Or path to database file if using sqlite3.
+DATABASE_NAME = 'yui3intro.db'             # Or path to database file if using sqlite3.
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -59,7 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'pcc2010.urls'
+ROOT_URLCONF = 'yui3intro.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates"

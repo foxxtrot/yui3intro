@@ -203,6 +203,40 @@ Y.delegate('click', handler, '#container', selector);
  \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+ \frametitle{YUI3 Templating}
+\begin{verbatim}
+TEMPLATE = "<li><a href='{link}'>{label}</a></li>";
+data = { 
+    link: "http://blog.foxxtrot.net/",
+    label: "My Blog"
+};
+
+Y.Lang.sub(TEMPLATE, data);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+ \frametitle{Advanced YUI3 Templating}
+\begin{verbatim}
+TEMPLATE = "<li class='{selected}'><a href='{link}'>{label}</a></li>";
+data = { 
+    link: "http://blog.foxxtrot.net/",
+    label: "My Blog",
+    selected: true
+};
+Y.use('substitutue', function(Y) {
+    Y.substitute(TEMPLATE, data, 
+        function(key, value) {
+            if(key === "selected") {
+                return value ? "selected" : "";
+            }
+            return value;
+        });
+});
+\end{verbatim}
+\end{frame}
+
 \subsection{AJAX}
 \begin{frame}[fragile]
  \frametitle{Server Calls}

@@ -1,9 +1,9 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core import serializers
 from django.shortcuts import render_to_response
-from pcc2010.checkin.models import Registration
+from yui3intro.checkin.models import Registration
 from django.db.models import Q
-from pcc2010.checkin.utilities import getNextPageNumber, getPrevPageNumber
+from yui3intro.checkin.utilities import getNextPageNumber, getPrevPageNumber
 import simplejson as json
 
 PAGE_LENGTH = 25
